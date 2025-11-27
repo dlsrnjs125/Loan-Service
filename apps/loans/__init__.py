@@ -1,0 +1,2 @@
+# Loans Django app
+

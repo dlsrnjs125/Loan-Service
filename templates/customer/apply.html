@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}대출 신청 - Loan Service{% endblock %}
+
+{% block content %}
+<div class="loan-apply-container">
+    <h1>대출 신청</h1>
+    
+    <form method="post" class="loan-apply-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">이메일</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">전화번호</label>
+            <input type="tel" id="phone" name="phone">
+        </div>
+        
+        <div class="form-group">
+            <label for="loan_product">대출상품</label>
+            <select id="loan_product" name="loan_product" required>
+                <option value="">선택하세요</option>
+                {% for product in products %}
+                <option value="{{ product.id }}">{{ product.name }} (최대 {{ product.max_amount|floatformat:0 }}원)</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="requested_amount">신청 금액</label>
+            <input type="number" id="requested_amount" name="requested_amount" min="0" step="1000" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="requested_term">대출 기간 (개월)</label>
+            <input type="number" id="requested_term" name="requested_term" min="1" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="purpose">대출 목적</label>
+            <textarea id="purpose" name="purpose" rows="4"></textarea>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">신청하기</button>
+    </form>
+</div>
+{% endblock %}
+
