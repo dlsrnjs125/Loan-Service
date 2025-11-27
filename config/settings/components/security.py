@@ -42,4 +42,3 @@ class SecuritySettings:
             "SECURE_BROWSER_XSS_FILTER": self.browser_xss_filter,
             "SECURE_CONTENT_TYPE_NOSNIFF": self.content_type_nosniff,
         }
-

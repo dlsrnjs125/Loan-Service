@@ -4,4 +4,3 @@ Admin configuration for Loans app
 """
 
 # TODO: 대출 도메인 Admin 설정 구현 예정
-

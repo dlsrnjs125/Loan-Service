@@ -52,4 +52,3 @@ if settings.DEBUG:
 admin.site.site_header = "Loan Service Administration"
 admin.site.site_title = "Loan Service Admin"
 admin.site.index_title = "Welcome to Loan Service Administration"
-

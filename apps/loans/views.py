@@ -4,4 +4,3 @@ Views for Loan Service DRF Backend
 """
 
 # TODO: 대출 도메인 ViewSet 구현 예정
-

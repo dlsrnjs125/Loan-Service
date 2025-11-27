@@ -4,4 +4,3 @@ Serializers for Loan Service DRF Backend
 """
 
 # TODO: 대출 도메인 Serializer 구현 예정
-

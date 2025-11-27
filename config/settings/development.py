@@ -32,6 +32,8 @@ SECURE_CONTENT_TYPE_NOSNIFF = False
 # 개발 환경에서는 기본적으로 SQLite 사용 (빠른 시작)
 # 환경 변수로 PostgreSQL을 명시적으로 설정하지 않은 경우 SQLite 사용
 import os
+
+
 if not os.environ.get("DB_HOST") or APP.use_sqlite:
     DATABASES = {
         "default": {
@@ -107,4 +109,3 @@ if APP.verbose_logs:
             },
         },
     }
-

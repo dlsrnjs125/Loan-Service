@@ -30,4 +30,3 @@ class AppSettings:
     def is_development(self) -> bool:
         """Check if running in development mode"""
         return self.debug or self.use_sqlite or self.use_dummy_cache
-

@@ -6,4 +6,3 @@ Loan models for Loan Service DRF Backend
 from apps.core.models import BaseModel
 
 # TODO: 대출 도메인 모델 구현 예정
-

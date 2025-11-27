@@ -157,4 +157,3 @@ SPECTACULAR_SETTINGS = {
     "SCHEMA_PATH_PREFIX": "/api/v1/",
     "OPERATION_ID_PREFIX": "api_v1_",
 }
-

@@ -6,6 +6,7 @@ import sys
 
 import django
 
+
 # Django 설정 모듈 설정 (Django 필수 요구사항)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.development")
 
