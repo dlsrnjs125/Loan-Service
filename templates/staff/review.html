@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}심사 관리 - Loan Service{% endblock %}
+
+{% block content %}
+<div class="review-container">
+    <h1>심사 대기 목록</h1>
+    
+    {% if applications %}
+    <table class="review-table">
+        <thead>
+            <tr>
+                <th>신청번호</th>
+                <th>고객명</th>
+                <th>대출상품</th>
+                <th>신청 금액</th>
+                <th>신청 기간</th>
+                <th>신청일</th>
+                <th>상태</th>
+                <th>작업</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applications %}
+            <tr>
+                <td>{{ application.id }}</td>
+                <td>{{ application.customer.name }}</td>
+                <td>{{ application.loan_product.name }}</td>
+                <td>{{ application.requested_amount|floatformat:0 }}원</td>
+                <td>{{ application.requested_term }}개월</td>
+                <td>{{ application.created_at|date:"Y-m-d" }}</td>
+                <td>
+                    <span class="status-badge status-{{ application.status }}">
+                        {{ application.get_status_display }}
+                    </span>
+                </td>
+                <td>
+                    <div class="action-buttons">
+                        <a href="/staff/review/{{ application.id }}/" class="btn btn-sm btn-primary">상세보기</a>
+                        {% if application.status == "pending" %}
+                        <form method="post" action="/staff/review/{{ application.id }}/approve/" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-success">승인</button>
+                        </form>
+                        <form method="post" action="/staff/review/{{ application.id }}/reject/" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">거절</button>
+                        </form>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="alert alert-info">
+        심사 대기 중인 신청이 없습니다.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

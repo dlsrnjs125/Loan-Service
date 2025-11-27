@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}신청 결과 - Loan Service{% endblock %}
+
+{% block content %}
+<div class="loan-result-container">
+    <h1>대출 신청 결과</h1>
+    
+    {% if application %}
+    <div class="result-card">
+        <h2>신청 정보</h2>
+        <p><strong>신청번호:</strong> {{ application.id }}</p>
+        <p><strong>고객명:</strong> {{ application.customer.name }}</p>
+        <p><strong>대출상품:</strong> {{ application.loan_product.name }}</p>
+        <p><strong>신청 금액:</strong> {{ application.requested_amount|floatformat:0 }}원</p>
+        <p><strong>신청 기간:</strong> {{ application.requested_term }}개월</p>
+        <p><strong>상태:</strong> 
+            <span class="status-badge status-{{ application.status }}">
+                {{ application.get_status_display }}
+            </span>
+        </p>
+        
+        {% if application.review_comment %}
+        <div class="review-comment">
+            <h3>심사 의견</h3>
+            <p>{{ application.review_comment }}</p>
+        </div>
+        {% endif %}
+    </div>
+    
+    <div class="actions">
+        <a href="/customer/apply/" class="btn btn-secondary">새로운 신청</a>
+    </div>
+    {% else %}
+    <div class="alert alert-info">
+        신청 정보를 찾을 수 없습니다.
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
