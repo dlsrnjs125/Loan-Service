@@ -1,7 +1,7 @@
 # Loan Service Makefile
 # 간편한 개발 환경 관리를 위한 명령어 모음
 
-.PHONY: help install local migrate clean shell check
+.PHONY: help install local migrate clean shell check format format-check
 
 # 기본 타겟
 .DEFAULT_GOAL := help
@@ -70,6 +70,30 @@ makemigrations: ## 마이그레이션 파일 생성
 	@echo "📝 Creating migration files..."
 	@source venv/bin/activate && python manage.py makemigrations
 	@echo "✅ Migration files created!"
+
+# ============================================================================
+# 코드 포맷팅 및 품질
+# ============================================================================
+
+format: ## 코드 포맷팅 및 린팅 (ruff)
+	@echo "🔥 Formatting code with ruff..."
+	@if [ ! -d "venv" ]; then \
+		echo "❌ Virtual environment not found. Run 'make install' first."; \
+		exit 1; \
+	fi
+	@. venv/bin/activate && ruff format .
+	@. venv/bin/activate && ruff check . --fix
+	@echo "✅ Code formatting & checking complete!"
+
+format-check: ## 코드 포맷팅 체크만 (수정 안함)
+	@echo "🔍 Checking code format with ruff..."
+	@if [ ! -d "venv" ]; then \
+		echo "❌ Virtual environment not found. Run 'make install' first."; \
+		exit 1; \
+	fi
+	@. venv/bin/activate && ruff format --check .
+	@. venv/bin/activate && ruff check .
+	@echo "✅ Code format check complete!"
 
 # ============================================================================
 # 유틸리티

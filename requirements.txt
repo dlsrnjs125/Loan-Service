@@ -19,3 +19,6 @@ python-decouple==3.8
 django-extensions>=3.2.3
 django-debug-toolbar>=4.2.0
 
+# Code Formatting & Linting
+ruff>=0.1.0
+
