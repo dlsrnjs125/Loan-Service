@@ -71,6 +71,8 @@ make local          # 개발 서버 실행 (포그라운드)
 make local bg       # 개발 서버 실행 (백그라운드)
 make migrate        # 마이그레이션 실행
 make makemigrations # 마이그레이션 파일 생성
+make format         # 코드 포맷팅 및 린팅 (ruff)
+make format-check   # 코드 포맷팅 체크만 (수정 안함)
 make check          # Django 시스템 체크
 make shell          # Django shell 실행
 make createsuperuser # 슈퍼유저 생성
@@ -108,7 +110,12 @@ Loan-Service/
 ├── static/                 # 정적 파일 (CSS, JS)
 │   └── css/
 ├── manage.py              # Django 관리 스크립트
+├── Makefile               # 개발 도구 명령어
 ├── requirements.txt       # Python 의존성
+├── pyproject.toml         # ruff 설정 (코드 포맷팅)
+├── .github/               # GitHub Actions 워크플로우
+│   └── workflows/
+│       └── test.yml       # CI/CD 테스트 파이프라인
 └── README.md              # 프로젝트 문서
 ```
 
@@ -117,6 +124,8 @@ Loan-Service/
 - **Framework**: Django 4.2 + Django REST Framework
 - **Database**: SQLite (개발), PostgreSQL (프로덕션)
 - **API Documentation**: drf-spectacular (Swagger/OpenAPI)
+- **Code Quality**: ruff (코드 포맷팅 및 린팅)
+- **CI/CD**: GitHub Actions
 
 ## 📝 현재 상태
 
@@ -126,6 +135,9 @@ Loan-Service/
 - 템플릿 폴더 구조 (고객용/직원용)
 - 데이터베이스 연결 설정 (SQLite 기본)
 - 기본 모델 구조 (BaseModel)
+- Makefile 개발 도구 (서버 실행, 마이그레이션, 포맷팅 등)
+- GitHub Actions CI/CD 파이프라인
+- 코드 품질 관리 (ruff 설정)
 
 ### 🔜 구현 예정
 - 대출 도메인 모델 (대출상품, 고객, 신청, 심사, 계약, 상환 등)
@@ -135,16 +147,28 @@ Loan-Service/
 
 ## 🔧 개발
 
+### 코드 포맷팅
+```bash
+make format         # 코드 포맷팅 및 자동 수정
+make format-check   # 포맷팅 체크만 (CI에서 사용)
+```
+
 ### 마이그레이션 생성
 ```bash
-python manage.py makemigrations
-python manage.py migrate
+make makemigrations # 또는 python manage.py makemigrations
+make migrate        # 또는 python manage.py migrate
 ```
 
 ### 테스트 실행
 ```bash
-python manage.py test
+make test           # 또는 python manage.py test
 ```
+
+### CI/CD
+GitHub Actions를 통해 자동으로 다음을 검사합니다:
+- Django 시스템 체크
+- 마이그레이션 체크
+- 코드 품질 체크
 
 ## 📚 API 문서
 
